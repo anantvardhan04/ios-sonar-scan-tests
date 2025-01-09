@@ -23,6 +23,9 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
+      - name: CocoaPod Install
+        run: pod install
+  
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0' # Not needed with a .ruby-version file
@@ -33,8 +36,8 @@ jobs:
         run: |
           set -o pipefail && \
           xcodebuild test \
-           -scheme IOSTestingKitchenSink \
-           -project IOSTestingKitchenSink.xcodeproj \
+           -scheme helloworld-ios-swift \
+           -project helloworld-ios-app.xcodeproj \
            -destination 'platform=iOS Simulator,name=iPhone 14' \
            -resultBundlePath "${{ github.workspace }}/TestResults" \
            CODE_SIGN_IDENTITY="" \
