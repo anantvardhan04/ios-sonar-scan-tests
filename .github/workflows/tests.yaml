@@ -1,0 +1,86 @@
+name: Unit tests
+
+on:
+  push:
+    branches: [master, develop, release/**, hotfix/**]
+    paths:
+      - '**/*.swift'
+
+concurrency:
+  group: build-ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Unit tests
+    runs-on: macos-13
+    timeout-minutes: 70
+
+    defaults:
+      run:
+        working-directory: ./iBeauty-App
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Cache pods
+        uses: actions/cache@v3
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+
+      - uses: apac-ibeauty/actions-ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_GH_SECRET }}
+
+      - name: CocoaPod Install
+        run: pod install
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: gem install xcpretty
+
+      # - name: Setup Xcode (latest stable)
+      #   uses: apac-ibeauty/actions-setup-xcode@v1
+      #   with:
+      #     xcode-version: 'latest-stable'
+
+      # - name: Build the app
+      #   run: |
+      #     xcodebuild clean build -workspace IBeauty.xcworkspace -scheme UAT CODE_SIGN_IDENTITY="" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+
+      # - name: Run tests
+      #   run: xcodebuild -workspace IBeauty.xcworkspace -scheme UAT -destination 'platform=iOS Simulator,name=iPad mini (6th generation),OS=15.2' test-without-building -only-testing:IBeautyTests
+
+      - name: Run tests
+        id: xcodebuild
+        run: |
+          set -o pipefail && \
+          xcodebuild test \
+          -workspace IBeauty.xcworkspace \
+          -scheme UAT \
+          -destination "platform=iOS Simulator,name=iPad mini (6th generation)" \
+          -resultBundlePath "${{ github.workspace }}/TestResults" \
+          -enableCodeCoverage YES \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO | xcpretty -tc
+
+      - uses: apac-ibeauty/actions-xcresulttool@main
+        with:
+          path: "${{ github.workspace }}/TestResults.xcresult"
+          upload-bundles: "failure"
+        if: success() || failure()
+
+      - name: Check test results
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Tests failed."
+            exit 1
+          fi
