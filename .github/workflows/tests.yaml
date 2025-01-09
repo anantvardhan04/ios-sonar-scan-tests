@@ -35,7 +35,7 @@ jobs:
           xcodebuild test \
            -scheme IOSTestingKitchenSink \
            -project IOSTestingKitchenSink.xcodeproj \
-           -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' \
+           -destination 'platform=iOS Simulator,name=iPhone 14' \
            -resultBundlePath "${{ github.workspace }}/TestResults" \
            CODE_SIGN_IDENTITY="" \
            CODE_SIGNING_REQUIRED=NO \
