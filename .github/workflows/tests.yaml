@@ -3,8 +3,6 @@ name: Unit tests
 on:
   push:
     branches: [master, develop, release/**, hotfix/**]
-    paths:
-      - '**/*.swift'
 
 concurrency:
   group: build-ios-${{ github.ref }}
