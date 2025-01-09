@@ -38,7 +38,7 @@ jobs:
         run: |
           set -o pipefail && \
           xcodebuild test \
-           -scheme helloworld-ios-swift \
+           -scheme helloworld-ios-app \
            -project helloworld-ios-app.xcodeproj \
            -destination 'platform=iOS Simulator,name=iPhone 14' \
            -resultBundlePath "${{ github.workspace }}/TestResults" \
