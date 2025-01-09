@@ -1,19 +1,36 @@
-# Swift:  Hello World!
-Basic project in Swift to start learning
+# IOS Swift Testing Kitchen Sink
+## Objective: 
+The A shared/group project dedicated to creating a simplistic set of exercises to teach the basics of IOS and Swift testing.
+
+*Please share feedback or ideas by raising issues. *
 
 
-## More Swift code
-- [Hello World!](https://github.com/erossini/Swift-HelloWorld)
-- [BMI Calculator](https://github.com/erossini/Swift-BMICalculator)
-- [Quote App](https://github.com/erossini/Swift-QuoteApp)
-- [ToDo List](https://github.com/erossini/Swift-TodoList)
-- [ToDo List with Core Data](https://github.com/erossini/Swift-TodoListCR)
-- [ToDo List with image and Swipe](https://github.com/erossini/Swift-ToDoListImageAndSwipe)
-- [CryptoCurrency](https://github.com/erossini/Swift-CryptoAPI) shows the value of a crypto currency in a real currency using API
+### Starting Lessons: 
 
-For more code and explanation, visit my blog [PureSourceCode](https://www.puresourcecode.com) and subscribe the newsletter to keep updated and receive all the posts about Swift. If you have any questions about this code, please post your comment, feedback or question in the [forum](https://www.puresourcecode.com/forum/forum/swift/). Here some posts to start with Swift:
+*Section A: Starting Out*
+0. Hello World
+1. Simple Function
+2. String Calculator
 
-- [Getting Started With Swift Development](https://www.puresourcecode.com/programming-languages/swift/getting-started-with-swift-development/)
-- [Starting Out With Swift Commands](https://www.puresourcecode.com/programming-languages/swift/starting-out-with-swift-commands/)
-- [Hello World Using Xcode And Swift](https://www.puresourcecode.com/programming-languages/swift/hello-world-using-xcode-and-swift/)
-- [This Is Swift!](https://www.puresourcecode.com/programming-languages/swift/this-is-swift/)
+*Section B: Beginner*
+1. 
+2. 
+3. 
+
+*Section C: Intermediate*
+
+##How to Contribute a lesson: 
+**Pull requests, Lessons and Issues comments are welcome**
+- Review the existing layout for tests. 
+- see if you can contribute a lesson or exercise.  
+
+1. Add an Entry in the Lessons Plist. Make sure you put in a title and description
+2. Create a new Group in the relevant Lessons Section and start adding
+3. Contribute changes as a pull request!
+
+
+
+Origin: 
+This project is beginning as a response to multiple Udacity students (myself included) desiring to learn more about Test Driven Development and specifically testing iOS code. The goal is to come up with a simple "representative" app for iOS and a set of example test cases that demonstrate how to build tests of various iOS elements including the App Delegate, network/asynchronous calls, etc.
+
+** Thanks and Enjoy ** 
