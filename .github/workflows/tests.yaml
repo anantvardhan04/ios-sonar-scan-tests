@@ -23,8 +23,10 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: CocoaPod Install
-        run: pod install
+      - name: Install CocoaPods dependencies
+        run: |
+          sudo gem install cocoapods
+          pod install
   
       - uses: ruby/setup-ruby@v1
         with:
