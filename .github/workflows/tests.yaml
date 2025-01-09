@@ -34,8 +34,8 @@ jobs:
         run: |
           set -o pipefail && \
           xcodebuild test \
-           -scheme HelloWorld \
-           -project HelloWorld.xcodeproj \
+           -scheme IOSTestingKitchenSink \
+           -project IOSTestingKitchenSink.xcodeproj \
            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' \
            -enableCodeCoverage YES | tee xcodebuild.log
 
